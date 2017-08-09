@@ -1,0 +1,58 @@
+
+public class MyMap<String,Integer>  {
+	
+  private My_HashTable table;
+  
+  private int size;
+  
+  private static class entry {
+	  private String key;
+	  private int value;
+	  
+	  public String getKey() {
+		  return key;
+	  }
+	  public int getValue() {
+		  return value;
+	  }
+	  
+	  public entry(String key,Integer val) {
+		  this.key=key;
+		  value=val;
+	  }
+	  public void set(String key,int value) {
+		  this.key=key;
+		  this.value=value;
+	  }
+  }
+  
+  
+  private int func(int a) {
+	  if(!isPrime(5*a))
+		  func(5*a+1);
+  }
+  
+  public MyMap(int size) {
+	  table=new My_HashTable(func(size));
+	  this.size=func(size);
+  }
+  
+  public void put(String key,int value) {
+	  if(table.array[hash(key)%size]==null)
+		  table.array[hash(key)%size]=value;
+	  else {
+		  int k=1;
+		  while()
+	  }
+  }
+  
+  private int hash(String key) {
+	  return table.hashCode(key);
+  }
+  public int get(String key) {
+	  return table.array[hash(key)];
+  }
+  
+
+
+}

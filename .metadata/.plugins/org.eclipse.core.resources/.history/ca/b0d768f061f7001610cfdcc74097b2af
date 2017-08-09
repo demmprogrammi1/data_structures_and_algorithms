@@ -1,0 +1,20 @@
+import java.util.*;
+import java.io.*;
+
+
+public class H {
+ 
+	public static void main(String[] args) throws Exception {
+		Scanner in=new Scanner(new FileReader("input.txt"));
+		PrintWriter out=new PrintWriter(new FileWriter("output.txt"));
+		String buf;
+		ArrayList<String> ar=new ArrayList<String>();
+		while(in.hasNext()) {
+			buf=in.next();
+			buf=buf.replaceAll(".", "");
+			ar.add(buf);
+		}
+		My_HashTable a=new My_HashTable(ar.size());
+		
+}
+}

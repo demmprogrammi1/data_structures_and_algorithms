@@ -1,0 +1,13 @@
+import java.util.*;
+import java.io.*;
+
+
+public class H {
+ 
+	public static void main(String[] args) throws Exception {
+		Scanner in=new Scanner(new FileReader("input.txt"));
+		PrintWriter out=new PrintWriter(new FileWriter("output.txt"));
+		My_HashTable a=new My_HashTable(10);
+		
+}
+}

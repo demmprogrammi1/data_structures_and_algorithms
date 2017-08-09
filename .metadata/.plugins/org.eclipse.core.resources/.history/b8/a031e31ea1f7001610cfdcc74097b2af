@@ -1,0 +1,17 @@
+
+public class MyMap<String,Integer> {
+	
+  private My_HashTable table;
+  
+  private  int size;
+  
+  public MyMap<String,Integer>(int size) {
+	  table=new My_HashTable(size);
+	  this.size=size;
+  }
+  
+  
+  
+
+
+}

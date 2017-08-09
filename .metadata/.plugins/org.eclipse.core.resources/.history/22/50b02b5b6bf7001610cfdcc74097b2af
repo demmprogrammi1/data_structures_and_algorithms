@@ -1,0 +1,38 @@
+
+public class My_HashTable {
+
+	private int[] array;
+	
+	private int size;
+	
+	public My_HashTable(int size) {
+		array=new int[7*size];
+		this.size=7*size;
+	}
+	 
+	public int power(int u) {
+	    int k=1;
+	    for(int i=0;i<k;i++) {
+	    	k*=33;
+	    	if(k>10000000)
+	    		k=k%size;
+	    }
+	    return k;
+	}
+    
+	public void put(String key,int value) {
+		array[hashCode(key)]=value;
+	}
+	
+	public int hashCode(String key) {
+	 int hash=0;
+	 for(int i=0;i<key.length();i++) {
+		 if(key.charAt(i)>='a'&&key.charAt(i)<='z')
+			hash+=(key.charAt(i)-32)*power(i);
+		 else
+			 hash+=key.charAt(i)*power(i);
+	 }
+	return hash%size;
+	}
+	
+}

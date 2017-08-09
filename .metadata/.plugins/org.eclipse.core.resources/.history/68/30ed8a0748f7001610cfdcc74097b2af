@@ -1,0 +1,41 @@
+import java.lang.*;
+import java.util.*;
+import java.io.*;
+
+public class knapstack {
+	
+	public static int time_to_int(String s) {
+		int hours=((s.charAt(0)-'0')*10+(s.charAt(1)-'0'))*60;
+		int minutes=(s.charAt(3)-'0')*10+s.charAt(4)-'0';
+		return hours+minutes;
+	}
+	
+	public static void main(String[] arg) throws IOException {
+		Scanner p=new Scanner(new FileReader("input.txt"));
+		PrintWriter out=new PrintWriter(new FileWriter("output.txt"));
+		Scanner in=new Scanner(p.nextLine());
+		ArrayList<Clock> items;
+		Clock temp_clock;
+		String buff;
+		double cost;
+		int money,count=0;
+		while(in.hasNext()) {
+			buff=in.next();
+			cost=in.nextDouble();
+			temp_clock=new Clock(time_to_int(buff),(int)(cost*100));
+			items.add(temp_clock);
+			count++;
+		}
+		out.println(count);
+		money=(int)(100*p.nextDouble());
+		int[][] knapstack=new int[count][money];
+		for(int i=1;i<=count;i++)
+			for(int j=1;j<=money;j++) {
+				knapstack[i][j]=knapstack[i-1][j];
+				if(j-items.get(i-1).cost>=0&&knapstack[i-1][j-items.get(i-1).cost]+items.get(i-1).time>knapstack[i][j])
+					knapstack[i][j]=knapstack[i-1][j-items.get(i-1).cost]+items.get(i-1).time;
+			}
+		out.print(knapstack[count][money]);
+		out.close();
+	}
+}

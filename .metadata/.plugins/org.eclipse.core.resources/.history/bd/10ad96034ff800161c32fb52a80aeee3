@@ -1,0 +1,25 @@
+import java.util.*;
+import java.io.*;
+
+
+public class H {
+ 
+	public static void main(String[] args) throws Exception {
+		Scanner in=new Scanner(new FileReader("input.txt"));
+		PrintWriter out=new PrintWriter(new FileWriter("output.txt"));
+		String buf;
+		ArrayList<String> words=new ArrayList<String>();
+		while(in.hasNext()) {
+			buf=in.next();
+			buf=buf.replaceAll(".", "");
+			words.add(buf);
+		}
+		MyMap map=new MyMap(words.size());
+		for(String word:words)
+				map.put(word,map.get(word)+1);
+		for(String word:words)
+			out.print(map.get(word)+" ");
+	    out.close();
+		
+}
+}

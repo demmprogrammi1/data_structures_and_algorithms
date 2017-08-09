@@ -1,0 +1,65 @@
+import java.util.*;
+import java.lang.*;
+public class MyMap {
+  
+  private int size;
+  
+  public int getSize() {
+	  return size;
+  }
+  
+  private My_HashTable table;
+  
+  public String print() {
+	  for(int i=0;i<table.array.length;i++)
+		  return table.array[i].getKey()+" "+String.valueOf(table.array[i].getValue());
+  }
+  
+  private boolean is(int a) {
+	  for(int i=2;i<=Math.round(Math.sqrt(a));i++)
+		  if(a%i==0)
+			  return false;
+	  return true;
+  }
+  private int func(int a) {
+	  int temp=5*a;
+	  while(!is(temp))
+		  temp++;
+	  return temp;
+  }
+  
+  public MyMap(int size) {
+	  table=new My_HashTable(func(size));
+	  this.size=func(size);
+  }
+  
+  public void put(String key,int value) {
+	  if(table.array[hash(key)%size]==null||table.array[hash(key)%size].getKey().equals(key))
+		  table.array[hash(key)%size]=new entry(key,value);
+	  else {
+		  int k=1;
+		  while(true) 
+			  if(table.array[(hash(key)+k*k)%size]==null||table.array[(hash(key)+k*k)%size].getKey().equals(key)) {
+				  table.array[(hash(key)+k*k)%size]=new entry(key,value);
+			      break;
+		  }
+			  else k++;
+	  }
+  }
+  
+  private int hash(String key) {
+	  return table.hashCode(key);
+  }
+  public int get(String key) {
+	  if(table.array[hash(key)%size]==null) return 0;
+	  if(table.array[hash(key)%size].getKey().equals(key))
+		  return table.array[hash(key)%size].getValue();
+	  else {
+		  int k=1;
+		  while(true)
+			  if(table.array[(hash(key)+k*k)%size].getKey().equals(key)) 
+				  return table.array[(hash(key)+k*k)%size].getValue();
+			  else k++;
+	  }
+  }
+}

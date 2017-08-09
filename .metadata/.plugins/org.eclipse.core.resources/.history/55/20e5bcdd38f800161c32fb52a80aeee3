@@ -1,0 +1,87 @@
+import java.util.*;
+import java.io.*;
+
+public class Sorting {
+	
+	public static List<int[]> arr=new ArrayList<int[]>();
+	
+	public static int[] buffer;
+	
+	public static int mult=10000;
+
+	
+	public static void mergesort(int l,int r,int col) {
+		if(l<r) {
+			int mid=(l+r)/2;
+			mergesort(l,mid,col);
+			mergesort(mid+1,r,col);
+			merge(l,mid,r,col);
+		}
+	}
+	public static void merge(int l,int m,int r,int column) {
+		 for (int i = l; i <=r; i++) 
+             buffer[i] = arr.get(i)[column];
+             int i = l;
+             int j = m+1;
+             int p = l;
+             while(i<=m&&j<=r) {
+            	 if(buffer[i]>buffer[j]) {
+            		 arr.get(p)[column]=buffer[j];
+            	     j++;
+            	 }
+            	 else
+            	 {
+            		 arr.get(p)[column]=buffer[i];
+            		 i++;
+            	 }
+            	 p++;  
+     }
+             while(j<=r) 
+                 arr.get(p++)[column]=buffer[j++];
+             while(i<=m)
+            	 arr.get(p++)[column]=buffer[i++];
+	}
+	
+
+	public static void main(String [] args)  throws IOException {
+		Scanner in=new Scanner(new FileReader("input.csv"));
+		PrintWriter out=new PrintWriter(new FileWriter("output.txt"));
+		String[] array;
+		int[] temp;
+		ArrayList<Integer> fine=new ArrayList<Integer>();
+		int leng=0;
+		while(in.hasNextLine()) {
+			array=in.nextLine().split(",");
+			leng=array.length;
+			temp=new int[array.length];
+			for(int i=0;i<array.length;i++)
+				temp[i]=(int)(Double.parseDouble(array[i])*mult);
+			  arr.add(temp);
+		} 
+		buffer=new  int[arr.size()];
+		for(int i=0;i<leng;i++)
+			mergesort(0,arr.size()-1,i);
+	/*	for(int i=0;i<arr.size();i++) {
+			for(int j=0;j<leng;j++)
+				out.print(arr.get(i)[j]+" ");
+		out.println(); 
+	} */
+		boolean fl=true;
+		int start=0;
+		for(int i=0;i<leng;i++) {
+			int diff=0;
+			if(arr.size()>1)
+			     diff=arr.get(1)[i]-arr.get(0)[i];
+			for(int j=2;j<arr.size();j++)
+				 if(arr.get(j)[i]-arr.get(j-1)[i]!=diff&&!fine.contains(i)) 
+					fine.add(i);
+				 
+		}
+	    for(int i=0;i<leng;i++)
+			if(!fine.contains(i))
+				start=start*10+i;
+		
+		out.print(start);
+		out.close();
+	}
+}

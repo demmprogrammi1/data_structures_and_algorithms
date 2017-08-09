@@ -1,0 +1,7 @@
+
+public class My_HashTable {
+
+	private int[] array;
+	
+	
+}
